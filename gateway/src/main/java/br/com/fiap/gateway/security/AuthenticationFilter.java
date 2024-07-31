@@ -1,10 +1,8 @@
 package br.com.fiap.gateway.security;
 
-import br.com.fiap.gateway.exception.BusinessException;
 import br.com.fiap.gateway.exception.RequestException;
 import br.com.fiap.gateway.exception.StandardError;
 import br.com.fiap.gateway.integration.ClientesServiceApi;
-import br.com.fiap.gateway.integration.dto.ClienteDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -13,7 +11,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
