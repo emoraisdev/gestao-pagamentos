@@ -32,14 +32,14 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<CustomFil
             if (token != null) {
 
                 try {
-                    var cliente = clientesServiceApi.validarToken(token);
+                    var usuario = clientesServiceApi.validarToken(token);
 
-                    if (cliente != null) {
+                    if (usuario != null) {
 
                         // Adiciona o Id do cliente para passar na requisição para os microserviços.
                         var request = exchange.getRequest()
                                 .mutate()
-                                .header("clienteId", cliente.id().toString())
+                                .header("usuarioId", usuario.id().toString())
                                 .build();
 
                         return chain.filter(exchange.mutate().request(request).build());

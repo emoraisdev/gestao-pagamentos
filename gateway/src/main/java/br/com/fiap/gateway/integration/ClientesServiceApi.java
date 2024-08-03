@@ -4,6 +4,7 @@ import br.com.fiap.gateway.exception.BusinessException;
 import br.com.fiap.gateway.exception.RequestException;
 import br.com.fiap.gateway.integration.dto.ClienteDTO;
 import br.com.fiap.gateway.integration.dto.TokenDTO;
+import br.com.fiap.gateway.integration.dto.UsuarioDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -45,7 +46,7 @@ public class ClientesServiceApi {
         });
     }
 
-    public ClienteDTO validarToken(String token) {
+    public UsuarioDTO validarToken(String token) {
 
         var requestBody = new TokenDTO(token);
 
@@ -56,7 +57,7 @@ public class ClientesServiceApi {
         );
 
         try {
-            return new ObjectMapper().readValue(retorno, ClienteDTO.class);
+            return new ObjectMapper().readValue(retorno, UsuarioDTO.class);
         } catch (Exception e) {
             e.printStackTrace();
         }

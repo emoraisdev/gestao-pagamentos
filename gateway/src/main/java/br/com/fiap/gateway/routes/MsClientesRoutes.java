@@ -24,7 +24,7 @@ public class MsClientesRoutes {
 
         routerBuilder.route("cadastro", this::configureCadastroRoute)
                 .route("login", this::configureLoginRoute)
-                .route("lsitar", r -> configureListarClientesRoute(r, authenticationFilter));
+                .route("listar", r -> configureListarClientesRoute(r, authenticationFilter));
     }
 
     private Buildable<Route> configureCadastroRoute(PredicateSpec r) {

@@ -1,5 +1,6 @@
 package br.com.fiap.msclientes.controller;
 
+import br.com.fiap.msclientes.model.Usuario;
 import br.com.fiap.msclientes.model.dto.ClienteResponseDTO;
 import br.com.fiap.msclientes.model.dto.LoginDTO;
 import br.com.fiap.msclientes.model.dto.TokenDTO;
@@ -26,7 +27,7 @@ public class AutenticacaoController {
     }
 
     @PostMapping("/validar")
-    public ResponseEntity<ClienteResponseDTO> validar(@RequestBody TokenDTO token){
+    public ResponseEntity<Usuario> validar(@RequestBody TokenDTO token){
 
         var cliente = service.validarToken(token.token());
 

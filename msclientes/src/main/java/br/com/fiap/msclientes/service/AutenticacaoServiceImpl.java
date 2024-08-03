@@ -1,9 +1,8 @@
 package br.com.fiap.msclientes.service;
 
-import br.com.fiap.msclientes.exception.BusinessException;
 import br.com.fiap.msclientes.exception.LoginInvalido;
 import br.com.fiap.msclientes.exception.TokenInvalido;
-import br.com.fiap.msclientes.model.dto.ClienteResponseDTO;
+import br.com.fiap.msclientes.model.Usuario;
 import br.com.fiap.msclientes.model.dto.LoginDTO;
 import br.com.fiap.msclientes.model.dto.TokenDTO;
 import br.com.fiap.msclientes.security.TokenService;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class AutenticacaoServiceImpl implements AutenticacaoService{
 
-    private final ClienteService clienteService;
+    private final UsuarioService usuarioService;
 
     private final PasswordEncoderService encoderService;
 
@@ -22,22 +21,19 @@ public class AutenticacaoServiceImpl implements AutenticacaoService{
 
     @Override
     public TokenDTO logar(LoginDTO login) {
-        var cliente = clienteService.getUsuarioEntidadeByEmail(login.usuario()).orElseThrow(LoginInvalido::new);
+        var usuario = usuarioService.getByUsuario(login.usuario()).orElseThrow(LoginInvalido::new);
 
-        if (encoderService.matches(login.senha(), cliente.getSenha())){
-            return new TokenDTO(tokenService.generateToken(cliente));
+        if (encoderService.matches(login.senha(), usuario.getSenha())){
+            return new TokenDTO(tokenService.generateToken(usuario));
         } else {
             throw new LoginInvalido();
         }
     }
 
     @Override
-    public ClienteResponseDTO validarToken(String token) {
-        String email = tokenService.validateToken(token);
-        if (email == null) {
-            throw new TokenInvalido();
-        }
+    public Usuario validarToken(String token) {
+        String usuario = tokenService.validateToken(token);
 
-        return clienteService.getClienteByEmail(email);
+        return usuarioService.getByUsuario(usuario).orElseThrow(TokenInvalido::new);
     }
 }
