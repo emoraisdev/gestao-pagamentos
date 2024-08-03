@@ -1,7 +1,6 @@
 package br.com.fiap.msclientes.controller;
 
 import br.com.fiap.msclientes.model.Usuario;
-import br.com.fiap.msclientes.model.dto.ClienteResponseDTO;
 import br.com.fiap.msclientes.model.dto.LoginDTO;
 import br.com.fiap.msclientes.model.dto.TokenDTO;
 import br.com.fiap.msclientes.service.AutenticacaoService;
