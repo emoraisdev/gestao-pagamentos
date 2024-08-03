@@ -18,36 +18,25 @@ public class ClienteServiceImpl implements ClienteService{
 
     private final ClienteRepository repo;
 
-    private final PasswordEncoderService passwordEncoder;
-
     @Override
     public ClienteIncluirResponseDTO incluir(ClienteDTO dto) {
-        if (!dto.senha().equals(dto.confirmacaoSenha())) {
-            throw new BusinessException("As senhas devem ser iguais.");
-        }
 
-        if (repo.getClienteByEmail(dto.email()).isPresent()) {
-            throw new BusinessException("E-mail já utilizado.");
+        if (repo.getClienteByCpf(dto.cpf()).isPresent()) {
+            throw new BusinessException("CPF já utilizado.");
         }
 
         Cliente cliente = toEntity(dto);
-        cliente.setSenha(passwordEncoder.encodePassword(dto.senha()));
 
         var clienteSalvo = repo.save(cliente);
         return new ClienteIncluirResponseDTO(clienteSalvo.getId());
     }
 
     @Override
-    public  ClienteResponseDTO getClienteByEmail(String email){
-        var cliente = repo.getClienteByEmail(email)
+    public  ClienteResponseDTO getClienteByCpf(String cpf){
+        var cliente = repo.getClienteByCpf(cpf)
                 .orElseThrow(() -> new EntityNotFoundException(Cliente.class.getSimpleName()));
 
         return toClienteResponseDTO(cliente);
-    }
-
-    @Override
-    public Optional<Cliente> getUsuarioEntidadeByEmail(String email){
-        return repo.getClienteByEmail(email);
     }
 
     @Override
@@ -67,7 +56,6 @@ public class ClienteServiceImpl implements ClienteService{
                 .estado(dto.estado())
                 .cep(dto.cep())
                 .pais(dto.pais())
-                .senha(dto.senha())
                 .build();
     }
 

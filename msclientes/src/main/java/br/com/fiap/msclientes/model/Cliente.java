@@ -17,13 +17,13 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String cpf;
 
     @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String email;
 
     @Column(nullable = false)
@@ -43,7 +43,4 @@ public class Cliente {
 
     @Column(nullable = false)
     private String pais;
-
-    @Column(nullable = false)
-    private String senha;
 }

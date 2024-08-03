@@ -38,12 +38,13 @@ public class ClienteController {
         return new ResponseEntity<>(usuarios, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/by-email/{email}",
+    @GetMapping(path = "/exists-by-cpf/{cpf}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<ClienteResponseDTO> getByEmail(@PathVariable String email) {
+    public ResponseEntity<Void> verifyByCpf(@PathVariable String cpf) {
 
-        var usuario = service.getClienteByEmail(email);
-        return new ResponseEntity<>(usuario, HttpStatus.OK);
+        service.getClienteByCpf(cpf);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

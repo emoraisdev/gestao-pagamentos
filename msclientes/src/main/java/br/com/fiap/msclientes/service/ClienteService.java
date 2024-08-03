@@ -11,9 +11,7 @@ public interface ClienteService {
 
     ClienteIncluirResponseDTO incluir(ClienteDTO dto);
 
-    ClienteResponseDTO getClienteByEmail(String email);
-
-    Optional<Cliente> getUsuarioEntidadeByEmail(String email);
+    ClienteResponseDTO getClienteByCpf(String cpf);
 
     Page<ClienteResponseDTO> listar(PageRequest pageRequest);
 

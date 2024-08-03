@@ -25,13 +25,6 @@ public record ClienteDTO(
         @NotBlank(message = "O CEP não pode estar em branco")
         String cep,
         @NotBlank(message = "O País não pode estar em branco")
-        String pais,
-        @Size(min = 6, message = "A Senha deve ter pelo menos 6 caracteres")
-        @Size(max = 12, message = "A Senha deve ter no máximo 12 caracteres")
-        String senha,
-
-        @Size(min = 6, message = "A Senha de confirmação deve ter pelo menos 6 caracteres")
-        @Size(max = 12, message = "A Senha de confirmação deve ter no máximo 12 caracteres")
-        String confirmacaoSenha
+        String pais
 ) {
 }
