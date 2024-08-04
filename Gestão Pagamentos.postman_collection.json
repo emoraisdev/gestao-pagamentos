@@ -178,6 +178,90 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "MsCartoes",
+			"item": [
+				{
+					"name": "Criar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cpf\": \"55034051028\",\r\n  \"limite\": 1000,\r\n  \"numero\": \"8089 4466 2477 2222\",\r\n  \"data_validade\": \"10/50\",\r\n  \"cvv\": \"142\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/cartao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"cartao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseBody = pm.response.json();\r",
+									"\r",
+									"if (responseBody != null && responseBody.token != null) {\r",
+									"    pm.collectionVariables.set(\"token\", responseBody.token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuario\": \"email1@email1.com\",\r\n    \"senha\": \"123123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/api/cartao/55034051028/8089 4466 2477 2222",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"cartao",
+								"55034051028",
+								"8089 4466 2477 2222"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"variable": [

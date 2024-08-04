@@ -63,8 +63,8 @@ public class CartaoServiceImpl implements CartaoService {
 
     private boolean isClienteExistente(String cpf) {
         try {
-            ResponseEntity<ClienteResponseDTO> responseEntity = restTemplate.getForEntity(urlMSClientes + "/cpf/" + cpf, ClienteResponseDTO.class);
-            if (responseEntity.getBody() != null) {
+            ResponseEntity<ClienteResponseDTO> responseEntity = restTemplate.getForEntity(urlMSClientes + "/exists-by-cpf/" + cpf, ClienteResponseDTO.class);
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
                 return true;
             }
         } catch (HttpClientErrorException.NotFound e) {
