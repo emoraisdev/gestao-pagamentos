@@ -1,0 +1,87 @@
+services:
+  db:
+    build:
+      context: ./mysql
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    networks:
+      - netms
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mscartoes:
+    build:
+      context: ./mscartoes
+    container_name: mscartoes
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8082:8082"
+    environment:
+      DB_URL: mysql_db
+      DB_NAME: cartoes
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      CLIENTE_URL: msclientes
+    networks:
+      - netms
+
+  mspagamentos:
+    build:
+      context: ./mspagamentos
+    container_name: mspagamentos
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8083:8083"
+    environment:
+      DB_URL: mysql_db
+      DB_NAME: pagamentos
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      CARTAO_URL: mscartoes
+    networks:
+      - netms
+
+  msclientes:
+    build:
+      context: ./msclientes
+    container_name: msclientes
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8081:8081"
+    environment:
+      DB_URL: mysql_db
+      DB_NAME: msclientes
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      TOKEN_SECRET: e-commerce2024 
+    networks:
+      - netms
+
+  gateway:
+    build:
+      context: ./gateway
+    container_name: gateway
+    ports:
+      - "8080:8080"
+    networks:
+      - netms
+    environment: 
+      DB_URL: mysql_db
+      DB_NAME: gateway
+      DB_USERNAME: root
+      DB_PASSWORD: root
+networks:
+  netms:
+    driver: bridge
