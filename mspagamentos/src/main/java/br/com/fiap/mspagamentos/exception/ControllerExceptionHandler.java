@@ -28,7 +28,7 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(SaldoInsuficienteException.class)
     public ResponseEntity<StandardError> saldoInsuficienteException(SaldoInsuficienteException erro, HttpServletRequest request){
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST.value())
+        return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED.value())
                 .body(getStandardError(HttpStatus.PAYMENT_REQUIRED.value(), "Erro na solicitação", erro.getMessage(), request.getRequestURI()));
     }
 

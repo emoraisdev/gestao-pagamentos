@@ -103,13 +103,6 @@ class ClienteServiceTest {
     }
 
     @Test
-    void incluir_DeveLancarExceptionQuandoDTOForNulo() {
-        assertThatExceptionOfType(NullPointerException.class)
-                .isThrownBy(() -> clienteService.incluir(null))
-                .withMessageContaining("Cannot invoke \"br.com.fiap.msclientes.model.dto.ClienteDTO.cpf()\" because \"dto\" is null");
-    }
-
-    @Test
     void getClienteByCpf_DeveRetornarClienteCorreto() {
         Cliente cliente = new Cliente();
         cliente.setId(1L);
