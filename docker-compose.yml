@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   db:
     build:
@@ -14,6 +16,10 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    deploy:
+      resources:
+        limits:
+          memory: 512M
 
   mscartoes:
     build:
@@ -32,6 +38,10 @@ services:
       CLIENTE_URL: msclientes
     networks:
       - netms
+    deploy:
+      resources:
+        limits:
+          memory: 512M
 
   mspagamentos:
     build:
@@ -50,6 +60,10 @@ services:
       CARTAO_URL: mscartoes
     networks:
       - netms
+    deploy:
+      resources:
+        limits:
+          memory: 512M
 
   msclientes:
     build:
@@ -68,6 +82,10 @@ services:
       TOKEN_SECRET: e-commerce2024 
     networks:
       - netms
+    deploy:
+      resources:
+        limits:
+          memory: 512M
 
   gateway:
     build:
@@ -82,6 +100,11 @@ services:
       DB_NAME: gateway
       DB_USERNAME: root
       DB_PASSWORD: root
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
 networks:
   netms:
     driver: bridge
