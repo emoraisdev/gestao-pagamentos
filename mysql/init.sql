@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS clientes;
+CREATE DATABASE IF NOT EXISTS msclientes;
 
-USE login;
+USE msclientes;
 
     -- login.usuario definition
 
