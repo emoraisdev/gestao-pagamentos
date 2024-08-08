@@ -12,13 +12,6 @@ import java.time.Instant;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<StandardError> entityNotFoundException(final EntityNotFoundException erro, final HttpServletRequest request){
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND.value())
-                .body(getStandardError(HttpStatus.NOT_FOUND.value(), "Entidade Não Encontrada", erro.getMessage(), request.getRequestURI()));
-    }
-
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<StandardError> businessException(BusinessException erro, HttpServletRequest request){
 
@@ -29,7 +22,7 @@ public class ControllerExceptionHandler {
     public ResponseEntity<StandardError> methodArgumentNotValidException(final MethodArgumentNotValidException erro, final HttpServletRequest request){
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST.value())
-                .body(getStandardError(HttpStatus.BAD_REQUEST.value(), "Erro de Validação", erro.getMessage(), request.getRequestURI()));
+                .body(getStandardError(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Erro de Validação", erro.getMessage(), request.getRequestURI()));
     }
 
     @ExceptionHandler(SaldoInsuficienteException.class)

@@ -14,6 +14,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -23,6 +25,8 @@ public class PagamentoServiceImpl implements PagamentoService{
     private final PagamentoRepository repo;
 
     private final CartaoServiceApi cartaoApi;
+
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/yy");
 
     @Override
     public ResponseRegistrarPagamentoDTO registrar(RegistrarPagamentoDTO dto) {
@@ -39,7 +43,7 @@ public class PagamentoServiceImpl implements PagamentoService{
 
         var pagamentoSalvo = repo.save(pagamento);
 
-        return new ResponseRegistrarPagamentoDTO(pagamentoSalvo.getId());
+        return new ResponseRegistrarPagamentoDTO(String.valueOf(pagamentoSalvo.getId()));
     }
 
     private void validarOperacao(RegistrarPagamentoDTO dto){
@@ -52,6 +56,12 @@ public class PagamentoServiceImpl implements PagamentoService{
 
         if (!cartao.getDataValidade().equals(dto.dataValidade())) {
             throw new BusinessException("Data de Validade Inválida.");
+        }
+
+        LocalDate dateValidade = LocalDate.parse(cartao.getDataValidade() + "/01", DateTimeFormatter.ofPattern("M/yy/dd"));
+
+        if (dateValidade.isBefore(LocalDate.now().plusMonths(-1))) {
+            throw new BusinessException("O cartão está vencido.");
         }
 
         if (!cartao.getCvv().equals(dto.cvv())) {
@@ -71,6 +81,18 @@ public class PagamentoServiceImpl implements PagamentoService{
 
     @Override
     public List<ResponsePagamentoDTO> consultarPorCliente(String cpf) {
-        return null;
+
+        var lista = repo.getPagamentoByCpf(cpf);
+
+        return lista.stream().map(this::toDTO).toList();
+    }
+
+    private ResponsePagamentoDTO toDTO(Pagamento pagamento){
+        return new ResponsePagamentoDTO(
+                pagamento.getValor(),
+                pagamento.getDescricao(),
+                pagamento.getMetodoPagamento().getDescricao(),
+                pagamento.getStatus().getDescricao()
+        );
     }
 }
