@@ -12,5 +12,5 @@ CREATE TABLE `usuario` (
                            UNIQUE KEY `UK5171l57faosmj8myawaucatdw` (`usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO usuario (1,usuario,senha) VALUES
-    ('admin','$2a$10$q4Yoxg20mSG7CO3DKbKzlO1NcPWpR9d2uK00gizx4SgGkwGdGRQTO');
+INSERT INTO usuario (id,usuario,senha) VALUES
+    (1,'adj2','$2a$12$ojb.ngrl83mhT1sur4lkgeukinr1WA4Y9hyOusO5Y/tZ0AUjNlgky');
