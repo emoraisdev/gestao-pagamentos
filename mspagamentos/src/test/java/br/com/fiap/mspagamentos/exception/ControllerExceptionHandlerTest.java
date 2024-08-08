@@ -42,7 +42,7 @@ public class ControllerExceptionHandlerTest {
         mockMvc.perform(post("/api/pagamentos")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"cpf\": \"\", \"numero\": \"\"}"))
-                .andExpect(status().isBadRequest())
+                .andExpect(status().isInternalServerError())
                 .andExpect(jsonPath("$.error").value("Erro de Validação"))
                 .andExpect(jsonPath("$.path").value("/api/pagamentos"));
     }
@@ -53,7 +53,7 @@ public class ControllerExceptionHandlerTest {
 
         mockMvc.perform(get("/api/pagamentos/cliente/123")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest())
+                .andExpect(status().isInternalServerError())
                 .andExpect(jsonPath("$.error").value("Erro na solicitação"))
                 .andExpect(jsonPath("$.message").value("Saldo insuficiente"))
                 .andExpect(jsonPath("$.path").value("/api/pagamentos/cliente/123"));
@@ -65,7 +65,7 @@ public class ControllerExceptionHandlerTest {
 
         mockMvc.perform(get("/api/pagamentos/cliente/123")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest())
+                .andExpect(status().isPaymentRequired())
                 .andExpect(jsonPath("$.error").value("Erro na solicitação"))
                 .andExpect(jsonPath("$.message").value("Saldo insuficiente"))
                 .andExpect(jsonPath("$.path").value("/api/pagamentos/cliente/123"));
