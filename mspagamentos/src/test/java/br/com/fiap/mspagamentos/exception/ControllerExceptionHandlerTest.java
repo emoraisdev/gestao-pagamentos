@@ -65,7 +65,7 @@ public class ControllerExceptionHandlerTest {
 
         mockMvc.perform(get("/api/pagamentos/cliente/123")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest())
+                .andExpect(status().isPaymentRequired())
                 .andExpect(jsonPath("$.error").value("Erro na solicitação"))
                 .andExpect(jsonPath("$.message").value("Saldo insuficiente"))
                 .andExpect(jsonPath("$.path").value("/api/pagamentos/cliente/123"));
