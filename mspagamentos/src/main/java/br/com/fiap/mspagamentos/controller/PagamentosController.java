@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PagamentosController {
 
-    private PagamentoService service;
+    private final PagamentoService service;
 
     @PostMapping
     private ResponseEntity<ResponseRegistrarPagamentoDTO> registrar(@Valid @RequestBody RegistrarPagamentoDTO dto){
