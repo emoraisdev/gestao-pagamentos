@@ -27,7 +27,7 @@ public class PagamentosController {
         return new ResponseEntity<>(retorno, HttpStatus.OK);
     }
 
-    @GetMapping("cliente/{cpf}")
+    @GetMapping("/cliente/{cpf}")
     private ResponseEntity<List<ResponsePagamentoDTO>> consultarPorCliente(@PathVariable String cpf){
 
         var retorno = service.consultarPorCliente(cpf);

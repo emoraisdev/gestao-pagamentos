@@ -11,8 +11,7 @@ import java.math.BigDecimal;
 public record ResponsePagamentoDTO(
         BigDecimal valor,
         String descricao,
-        @JsonProperty("metodo_pagamento")
-        String metodoPagamento,
+        String metodo_pagamento,
         String status
 ) {
 }

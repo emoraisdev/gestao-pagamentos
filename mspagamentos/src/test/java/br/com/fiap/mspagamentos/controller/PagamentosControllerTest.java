@@ -52,7 +52,7 @@ public class PagamentosControllerTest {
                 new BigDecimal("100.00")
         );
 
-        var responseDto = new ResponseRegistrarPagamentoDTO(1L);
+        var responseDto = new ResponseRegistrarPagamentoDTO("1");
 
         when(service.registrar(any(RegistrarPagamentoDTO.class))).thenReturn(responseDto);
 
