@@ -15,13 +15,13 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<StandardError> businessException(BusinessException erro, HttpServletRequest request){
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST.value())
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .body(getStandardError(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Erro na solicitação", erro.getMessage(), request.getRequestURI()));
     }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<StandardError> methodArgumentNotValidException(final MethodArgumentNotValidException erro, final HttpServletRequest request){
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST.value())
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .body(getStandardError(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Erro de Validação", erro.getMessage(), request.getRequestURI()));
     }
 
