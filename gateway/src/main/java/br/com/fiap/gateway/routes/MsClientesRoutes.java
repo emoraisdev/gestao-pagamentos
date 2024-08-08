@@ -22,14 +22,15 @@ public class MsClientesRoutes {
 
     public void createRoutes(RouteLocatorBuilder.Builder routerBuilder, AuthenticationFilter authenticationFilter) {
 
-        routerBuilder.route("cadastro", this::configureCadastroRoute)
+        routerBuilder.route("cadastro", r -> configureCadastroRoute(r, authenticationFilter))
                 .route("login", this::configureLoginRoute)
                 .route("listar", r -> configureListarClientesRoute(r, authenticationFilter));
     }
 
-    private Buildable<Route> configureCadastroRoute(PredicateSpec r) {
+    private Buildable<Route> configureCadastroRoute(PredicateSpec r, AuthenticationFilter authenticationFilter) {
         return r.path(API_CLIENTE)
                 .and().method(HttpMethod.POST)
+                .filters(f -> f.filter(authenticationFilter.apply(new CustomFilterConfig(""))))
                 .uri(msclientes);
     }
 
