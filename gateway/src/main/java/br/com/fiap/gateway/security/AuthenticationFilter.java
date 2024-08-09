@@ -67,7 +67,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<CustomFil
         };
     }
 
-    private static StandardError getStandardError(String responseBody) {
+    static StandardError getStandardError(String responseBody) {
         StandardError standardError = null;
         try {
             ObjectMapper objectMapper = new ObjectMapper();

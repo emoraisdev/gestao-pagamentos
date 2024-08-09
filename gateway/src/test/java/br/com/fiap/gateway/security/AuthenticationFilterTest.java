@@ -1,23 +1,20 @@
 package br.com.fiap.gateway.security;
-import br.com.fiap.gateway.exception.RequestException;
+
 import br.com.fiap.gateway.exception.StandardError;
 import br.com.fiap.gateway.integration.ClientesServiceApi;
-import br.com.fiap.gateway.integration.dto.UsuarioDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.mock.http.server.reactive.MockServerHttpRequest;
 import org.springframework.mock.web.server.MockServerWebExchange;
-import org.springframework.web.server.ServerWebExchange;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class AuthenticationFilterTest {
+class AuthenticationFilterTest {
 
     private AuthenticationFilter authenticationFilter;
     private ClientesServiceApi clientesServiceApi;
@@ -29,7 +26,7 @@ public class AuthenticationFilterTest {
     }
 
     @Test
-    public void deveRetornarErroQuandoTokenNaoForInformado() {
+    void deveRetornarErroQuandoTokenNaoForInformado() {
         ServerHttpRequest request = MockServerHttpRequest.get("/").build();
         MockServerWebExchange exchange = MockServerWebExchange.from((MockServerHttpRequest) request);
 
@@ -44,7 +41,7 @@ public class AuthenticationFilterTest {
     }
 
     @Test
-    public void deveRetornarErroQuandoTokenForInvalido() {
+    void deveRetornarErroQuandoTokenForInvalido() {
         ServerHttpRequest request = MockServerHttpRequest.get("/")
                 .header(HttpHeaders.AUTHORIZATION, "Bearer tokenInvalido")
                 .build();
@@ -63,7 +60,7 @@ public class AuthenticationFilterTest {
     }
 
     @Test
-    public void deveRetornarStandardErrorQuandoJsonForValido() {
+    void deveRetornarStandardErrorQuandoJsonForValido() {
         // Dados de entrada
         String responseBody = "{\"error\": \"Mensagem de erro\", \"status\": 400, \"message\": \"Mensagem de erro\"}";
 
@@ -77,7 +74,7 @@ public class AuthenticationFilterTest {
     }
 
     @Test
-    public void deveRetornarNullQuandoJsonForInvalido() {
+    void deveRetornarNullQuandoJsonForInvalido() {
         // Dados de entrada
         String responseBody = "dados invalidos";
 
@@ -89,7 +86,7 @@ public class AuthenticationFilterTest {
     }
 
     @Test
-    public void deveRetornarErroDesconhecidoQuandoOcorrerExcecao() {
+    void deveRetornarErroDesconhecidoQuandoOcorrerExcecao() {
         ServerHttpRequest request = MockServerHttpRequest.get("/")
                 .header(HttpHeaders.AUTHORIZATION, "Bearer tokenValido")
                 .build();
