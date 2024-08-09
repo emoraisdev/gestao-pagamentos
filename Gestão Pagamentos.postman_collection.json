@@ -10,35 +10,6 @@
 			"name": "MsClientes",
 			"item": [
 				{
-					"name": "Cadastrar",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"cpf\": \"26504461023\",\r\n    \"nome\": \"teste7\",\r\n    \"email\": \"email3@email1.com\",\r\n    \"telefone\": \"41 99999-9999\",\r\n    \"rua\": \"Teste 1\",\r\n    \"cidade\": \"Cidade 1\",\r\n    \"estado\": \"Estado 2\",\r\n    \"cep\": \"123-12345\",\r\n    \"pais\": \"Brasil\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/cliente",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"cliente"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Logar",
 					"event": [
 						{
@@ -84,6 +55,45 @@
 					"response": []
 				},
 				{
+					"name": "Cadastrar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cpf\": \"26504461023\",\r\n    \"nome\": \"teste7\",\r\n    \"email\": \"email3@email1.com\",\r\n    \"telefone\": \"41 99999-9999\",\r\n    \"rua\": \"Teste 1\",\r\n    \"cidade\": \"Cidade 1\",\r\n    \"estado\": \"Estado 2\",\r\n    \"cep\": \"123-12345\",\r\n    \"pais\": \"Brasil\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/cliente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Listar",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -120,94 +130,6 @@
 							"path": [
 								"api",
 								"cliente"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "MsPagamentos",
-			"item": [
-				{
-					"name": "Registrar",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"cpf\": \"26504461023\",\r\n    \"numero\": \"8089 4466 2477 2225\",\r\n    \"data_validade\": \"09/24\",\r\n    \"cvv\": \"142\",\r\n    \"valor\": 999.0\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/pagamentos",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"pagamentos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Listar",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/pagamentos/cliente/26504461023",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"pagamentos",
-								"cliente",
-								"26504461023"
 							]
 						}
 					},
@@ -298,6 +220,94 @@
 								"cartao",
 								"26504461023",
 								"8089 4466 2477 2225"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MsPagamentos",
+			"item": [
+				{
+					"name": "Registrar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cpf\": \"26504461023\",\r\n    \"numero\": \"8089 4466 2477 2225\",\r\n    \"data_validade\": \"09/24\",\r\n    \"cvv\": \"142\",\r\n    \"valor\": 999.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pagamentos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pagamentos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pagamentos/cliente/26504461023",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pagamentos",
+								"cliente",
+								"26504461023"
 							]
 						}
 					},
